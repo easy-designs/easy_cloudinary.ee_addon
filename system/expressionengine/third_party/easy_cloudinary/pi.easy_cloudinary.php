@@ -181,7 +181,14 @@ class Easy_cloudinary {
 	{
 		ob_start(); ?>
 
-COMING SOON
+All configuration of this plugin happens in your ExpressionEngine Configuration file:
+
+```
+$config['easy_cloudinary'] = array(
+	'account'  => 'YOUR_CLOUDINARY_ACCOUNT_HANDLE',
+	'template' => '<img src=""'
+);
+```
 
 <?php
 		$buffer = ob_get_contents();
