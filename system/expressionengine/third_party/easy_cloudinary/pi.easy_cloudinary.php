@@ -37,11 +37,10 @@ class Easy_cloudinary {
 	 */
 	function __construct()
 	{
-		if ( isset( ee()->config['easy_cloudinary'] ) )
+		# grab the config
+		$this->cloudinary_config = ee()->config->item('easy_cloudinary');
+		if ( $this->cloudinary_config !== NULL )
 		{
-			# grab the config
-			$this->cloudinary_config = ee()->config['easy_cloudinary'];
-			
 			# get the host name
 			$http_host = strToLower( ee()->input->server('HTTP_HOST') );
 			$ssl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
@@ -63,7 +62,7 @@ class Easy_cloudinary {
 	 */
 	function convert( $str='' )
 	{
-		$account = $this->cloudinary_config['account'];
+		$cloud_name = $this->cloudinary_config['cloud_name'];
 		$template = $this->cloudinary_config['template'];
 		
 		# in case we have relative image paths
@@ -143,23 +142,27 @@ class Easy_cloudinary {
 				# Format the src to include this domain is we don’t have it already
 				if ( strpos( $src, $this->site_domain ) === FALSE )
 				{
-					if ( substr ( $src, 0, 1 ) == '/' )
+					# only modify if not a fully qualified domain
+					if ( preg_match( "/^https?:\\/\\//", $src ) === 0 )
 					{
-						$src = "{$this->site_domain}{$src}";
-					}
-					else
-					{
-						$src = "{$this->site_domain}{$current_path}{$src}";
+						if ( substr( $src, 0, 1 ) == '/' )
+						{
+							$src = "{$this->site_domain}{$src}";
+						}
+						else
+						{
+							$src = "{$this->site_domain}{$current_path}{$src}";
+						}
 					}
 				}
 				
 				# build the new image
 				$swap = array(
-					'cloud_name' => $this->account,
+					'cloud_name' => $cloud_name,
 					'attributes' => implode( ' ', $attributes ),
 					'image_url'	 => $src
 				);
-				$new_img = ee()->functions->var_swap( $this->template, $swap );
+				$new_img = ee()->functions->var_swap( $template, $swap );
 				
 				$str = str_replace( $original_img, $new_img, $str );
 				
