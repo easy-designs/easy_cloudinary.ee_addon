@@ -155,7 +155,7 @@ class Easy_cloudinary {
 				
 				# build the new image
 				$swap = array(
-					'account'    => $this->account,
+					'cloud_name' => $this->account,
 					'attributes' => implode( ' ', $attributes ),
 					'image_url'	 => $src
 				);
@@ -185,8 +185,8 @@ All configuration of this plugin happens in your ExpressionEngine Configuration 
 
 ```
 $config['easy_cloudinary'] = array(
-	'account'  => 'YOUR_CLOUDINARY_ACCOUNT_HANDLE',
-	'template' => '<img src=""'
+	'cloud_name' => 'YOUR_CLOUDINARY_CLOUD_NAME',
+	'template'   => '<img src="https://res.cloudinary.com/{cloud_name}/image/fetch/f_auto,q_auto/{image_url}" {attributes}>'
 );
 ```
 
