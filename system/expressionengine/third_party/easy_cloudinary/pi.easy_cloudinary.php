@@ -149,7 +149,7 @@ class Easy_cloudinary {
 					}
 					else
 					{
-						$src = "{$this->site_domain}{$current_path}{$src}"
+						$src = "{$this->site_domain}{$current_path}{$src}";
 					}
 				}
 				
