@@ -10,8 +10,8 @@ All configuration of this plugin happens in your ExpressionEngine Configuration 
 
 ```php
 $config['easy_cloudinary'] = array(
-	'cloud_name' => 'YOUR_CLOUDINARY_CLOUD_NAME',
-	'template'   => '<img src="https://res.cloudinary.com/{cloud_name}/image/fetch/f_auto,q_auto/{image_url}" {attributes}>'
+  'cloud_name' => 'YOUR_CLOUDINARY_CLOUD_NAME',
+  'template'   => '<img src="https://res.cloudinary.com/{cloud_name}/image/fetch/f_auto,q_auto/{image_url}" {attributes}>'
 );
 ```
 
