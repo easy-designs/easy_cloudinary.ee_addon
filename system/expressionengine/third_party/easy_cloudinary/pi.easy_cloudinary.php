@@ -190,6 +190,14 @@ $config['easy_cloudinary'] = array(
 );
 ```
 
+Once you have that in place, you simply wrap the content you want to adjust. All images will be processed through Cloudinary.
+
+{exp:easy_cloudinary}
+  YOUR CONTENT
+{/exp:easy_cloudinary}
+
+Any images (local or remote) will be swapped for Cloudinary-handled ones using the template you set up in the config file.
+
 <?php
 		$buffer = ob_get_contents();
 		ob_end_clean();
