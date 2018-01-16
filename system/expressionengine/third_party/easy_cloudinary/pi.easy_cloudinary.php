@@ -21,7 +21,7 @@ $plugin_info = array(
 	'pi_version'		=> '1.0',
 	'pi_author'			=> 'Aaron Gustafson',
 	'pi_author_url'		=> 'https://www.aaron-gustafson.com/',
-	'pi_description'	=> 'Automates swapping of Cloudinary’s image paths for local (server-based) ones.',
+	'pi_description'	=> 'Automates swapping your local (and remote) image paths for Cloudinary’s.',
 	'pi_usage'			=> Easy_cloudinary::usage()
 );
 
@@ -42,10 +42,7 @@ class Easy_cloudinary {
 		if ( $this->cloudinary_config !== NULL )
 		{
 			# get the host name
-			$http_host = strToLower( ee()->input->server('HTTP_HOST') );
-			$ssl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
-			$protocol = $ssl ? 'https://' : 'http://';
-			$this->site_domain = "{$protocol}{$http_host}";
+			$this->site_domain = ee()->config->item('site_url');
 			$this->return_data = $this->convert( ee()->TMPL->tagdata );
 		}
 		else
@@ -192,6 +189,8 @@ $config['easy_cloudinary'] = array(
 	'template'   => '<img src="https://res.cloudinary.com/{cloud_name}/image/fetch/f_auto,q_auto/{image_url}" {attributes}>'
 );
 ```
+
+Be sure you have set the URL to the root directory of your site in your config file or in CP Home > Administration > General Configuration.
 
 Once you have that in place, you simply wrap the content you want to adjust. All images will be processed through Cloudinary.
 
