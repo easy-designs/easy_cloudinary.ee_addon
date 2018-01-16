@@ -1,7 +1,7 @@
 Easy Cloudinary for ExpressionEngine
 ====================================
 
-ExpressionEngine Plugin to automate use of the Cloudinary
+ExpressionEngine Plugin to automate use of the Cloudinary.
 
 Setting it up
 -------------
@@ -14,6 +14,8 @@ $config['easy_cloudinary'] = array(
   'template'   => '<img src="https://res.cloudinary.com/{cloud_name}/image/fetch/f_auto,q_auto/{image_url}" {attributes}>'
 );
 ```
+
+Be sure you have set the URL to the root directory of your site in your config file or in `CP Home > Administration > General Configuration`.
 
 Once you have that in place, you simply wrap the content you want to adjust. All images will be processed through Cloudinary.
 
